@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"
+                android:clipToPadding="false"
+                >
+
+
+    <TextView
+            style="@style/CardView.Bus.Number"
+            android:id="@+id/status_number"
+            android:text="Bus 666"/>
+
+
+    <TextView
+            style="@style/CardView.Bus.Time"
+            android:id="@+id/status_time"
+            android:text="30 sec"/>
+
+    <TextView
+            style="@style/CardView.Bus.Status"
+            android:id="@+id/status_status"
+            android:layout_below="@id/status_time"
+            android:text="On its way to the downtown campus this is a status for a test blab bla bla http://google.com"/>
+
+    <View
+            style="@style/CardView.Bus.Divider"
+            android:id="@+id/status_divider"
+            android:layout_below="@id/status_status" />
+
+</RelativeLayout>
