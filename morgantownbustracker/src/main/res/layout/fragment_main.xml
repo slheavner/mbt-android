@@ -2,6 +2,7 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:clipToPadding="false"
                 tools:context=".MainActivityFragment">
 
 
@@ -13,7 +14,8 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:background="@color/md_grey_800"
+            android:clipToPadding="false"
+            android:background="@color/md_grey_300"
             android:paddingLeft="10dp"
             android:paddingRight="10dp">
 
@@ -21,6 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/list_view"
+                android:clipToPadding="false"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
@@ -29,18 +32,4 @@
                 />
 
     </android.support.v4.widget.SwipeRefreshLayout>
-
-    <android.support.design.widget.FloatingActionButton
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:id="@+id/add_button"
-            android:src="@android:drawable/ic_input_add"
-            app:backgroundTint="@color/md_light_blue_500"
-            android:tint="@color/md_white"
-            android:onClick="openBusDialog"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"/>
 </RelativeLayout>

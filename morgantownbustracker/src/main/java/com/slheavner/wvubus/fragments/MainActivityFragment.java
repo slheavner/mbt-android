@@ -1,10 +1,10 @@
-package com.slheavner.wvubus.controllers;
+package com.slheavner.wvubus.fragments;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,13 +15,13 @@ import android.view.ViewGroup;
 import com.google.gson.Gson;
 import com.slheavner.wvubus.R;
 import com.slheavner.wvubus.models.Bus;
+import com.slheavner.wvubus.views.adapters.BusAdapter;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+import jp.wasabeef.recyclerview.animators.LandingAnimator;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,7 +29,9 @@ import java.util.List;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment {
+public class MainActivityFragment extends Fragment{
+
+    public static String TAG = "MainActivityFragment";
 
     public static String API_URL = "https://morgantownbustracker.herokuapp.com/initialize";
 
@@ -64,8 +66,6 @@ public class MainActivityFragment extends Fragment {
         return Arrays.asList(busList);
     }
 
-
-
     private List<Bus> orderBusList(List<Bus> buses){
         List<String> busIds = Arrays.asList(getResources().getStringArray(R.array.bus_ids));
         Bus[] busList = new Bus[buses.size()];
@@ -75,6 +75,11 @@ public class MainActivityFragment extends Fragment {
         return Arrays.asList(busList);
     }
 
+    private void installRawJson(){
+        BufferedReader reader =  new BufferedReader(new InputStreamReader(getResources().openRawResource(R.raw.buses)));
+        this.busData = Arrays.asList( new Gson().fromJson(reader, Bus[].class));
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -82,6 +87,8 @@ public class MainActivityFragment extends Fragment {
 
             this.busData = readBusJson();
         } catch (IOException e) {
+            installRawJson();
+            new UpdateBusAsyncTask().execute(API_URL);
             e.printStackTrace();
         }
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
@@ -89,6 +96,8 @@ public class MainActivityFragment extends Fragment {
         this.floatingActionButton = (FloatingActionButton) rootView.findViewById(R.id.add_button);
         this.swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_view);
         this.listView = (RecyclerView) rootView.findViewById(R.id.list_view);
+        listView.setItemAnimator(new LandingAnimator());
+        listView.getItemAnimator().setRemoveDuration(700);
         this.swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -97,13 +106,10 @@ public class MainActivityFragment extends Fragment {
         });
         this.layoutManager = new LinearLayoutManager(getActivity());
         this.listView.setLayoutManager(layoutManager);
-        this.adapter = new BusAdapter(busData);
+        this.adapter = new BusAdapter(busData, getActivity());
         this.listView.setAdapter(adapter);
-
         return rootView;
     }
-
-
 
     private class UpdateBusAsyncTask extends AsyncTask<String, Integer, List<Bus>>{
 
@@ -139,8 +145,9 @@ public class MainActivityFragment extends Fragment {
             }else{
                 Log.d("mbt", "many buses");
                 if(MainActivityFragment.this.adapter != null){
-                    adapter.setData(buses);
-                    adapter.notifyDataSetChanged();
+                    MainActivityFragment.this.busData = buses;
+                    adapter.setData(buses, MainActivityFragment.this.getActivity());
+                    //adapter.notifyDataSetChanged();
                 }
             }
         }
@@ -155,6 +162,10 @@ public class MainActivityFragment extends Fragment {
             return body;
 
         }
+    }
+
+    public void updateAdapter(){
+        this.adapter.notifyDataSetChanged();
     }
 
 

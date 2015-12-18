@@ -5,43 +5,52 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="20dp"
-                                    card_view:cardCornerRadius="5dp"
+                                    card_view:cardCornerRadius="@dimen/cardview.corner"
                                     android:background="?selectableItemBackground"
                                     tools:context=".MainActivity">
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:clickable="false"
+            android:focusable="false"
+            android:background="?android:selectableItemBackground">
+
         <RelativeLayout
                 style="@style/CardView.Title"
-                android:id="@+id/card.title">
+                android:id="@+id/card.title"
+                android:clickable="false">
             <TextView
                     style="@style/CardView.Number"
-                    android:id="@+id/card.title.number"
-                    android:text="99"/>
+                    android:id="@+id/card.title.number"/>
 
             <TextView
                     style="@style/CardView.Name"
-                    android:id="@+id/card.title.name"
-                    android:text="Title TextView"/>
+                    android:id="@+id/card.title.name"/>
         </RelativeLayout>
         <com.slheavner.wvubus.views.StatusView
                 android:id="@+id/bus_one"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp">
+                android:layout_marginBottom="6dp"
+                android:clickable="false"
+                android:focusable="false">
 
         </com.slheavner.wvubus.views.StatusView>
         <com.slheavner.wvubus.views.StatusView
                 android:id="@+id/bus_two"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
                 android:layout_marginBottom="6dp">
 
         </com.slheavner.wvubus.views.StatusView>
         <com.slheavner.wvubus.views.StatusView
                 android:id="@+id/bus_three"
                 android:layout_width="match_parent"
+                android:clickable="false"
+                android:focusable="false"
                 android:layout_height="wrap_content">
 
         </com.slheavner.wvubus.views.StatusView>

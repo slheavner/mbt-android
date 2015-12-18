@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:background="@color/md_white"
+        >
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/about.header"
+                    android:padding="30dp"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:background="@color/md_grey_300"
+                    style="@style/AboutText"
+                    android:text="@string/about.header"/>
+            <TextView
+                    style="@style/AboutText"
+                    android:gravity="left"
+                    android:textSize="20sp"
+                    android:id="@+id/about.desc"
+                    android:padding="25dp"/>
+            <ImageButton
+                    android:id="@+id/about.github"
+                    android:layout_gravity="center_horizontal"
+                    android:clickable="true"
+                    android:layout_width="200dp"
+                    android:layout_height="100dp"
+                    android:background="@color/md_grey_200"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/github_logo"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

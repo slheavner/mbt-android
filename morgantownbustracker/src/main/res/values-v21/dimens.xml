@@ -1,0 +1,3 @@
+<resources>
+    <dimen name="cardview.corner">6dp</dimen>
+</resources>

@@ -1,11 +1,10 @@
 package com.slheavner.wvubus.models;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.graphics.Color;
 import com.google.android.gms.maps.model.LatLng;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Bus {
 
@@ -221,4 +220,19 @@ public class Bus {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if(o instanceof Bus){
+            Bus cBus = (Bus) o;
+            if(!this.id.equals(((Bus) o).get_id())){
+                return false;
+            }
+            for(int i = 0; i < locations.length; i++){
+                if(locations[i].getTime() != cBus.getLocations()[i].getTime()){
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
 }

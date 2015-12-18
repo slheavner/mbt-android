@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.slheavner.wvubus.R;
 import com.slheavner.wvubus.models.Bus;
 
+import java.util.Locale;
+
 /**
  * Created by Sam on 12/14/2015.
  */
@@ -149,7 +151,7 @@ public class StatusView extends RelativeLayout{
             }else if(time < 300){
                 int min = time / 60;
                 int sec = time - (60 * min);
-                timeString = min + ":" + sec + " min";
+                timeString = String.format(Locale.ENGLISH, "%d:%02d min", min, sec);
                 colorId = R.drawable.time_background_good;
             }else if(time < 2700){
                 timeString = (time/60) + " min";
@@ -180,8 +182,13 @@ public class StatusView extends RelativeLayout{
     }
 
     public void setLocation(Bus.Location location, String id){
-        this.setNumber("Bus " + location.getBus());
         this.setStatus(location.getDesc());
-        this.setTime(location.getTime(), id);
+        if(id.equals("prt")){
+            this.setNumber("");
+            this.setTime(location.getBus(), id);
+        }else{
+            this.setNumber("Bus " + location.getBus());
+            this.setTime(location.getTime(), id);
+        }
     }
 }
