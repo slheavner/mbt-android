@@ -6,18 +6,18 @@
             android:title="@string/colors.category"
             android:persistent="false">
         <CheckBoxPreference
-                android:key="colors_main"
+                android:key="@string/colors.main.key"
                 android:title="@string/colors.main"
                 android:summary="@string/colors.main.summary"
                 android:defaultValue="false"/>
 
         <CheckBoxPreference
-                android:key="colors_map"
+                android:key="@string/colors.map.key"
                 android:title="@string/colors.map"
                 android:summary="@string/colors.map.summary"
                 android:defaultValue="false"/>
         <CheckBoxPreference
-                android:key="colors_info"
+                android:key="@string/colors.info.key"
                 android:title="@string/colors.info"
                 android:summary="@string/colors.info.summary"
                 android:defaultValue="false"/>

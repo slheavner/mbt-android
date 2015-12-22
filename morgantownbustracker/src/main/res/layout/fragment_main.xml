@@ -5,28 +5,26 @@
                 android:clipToPadding="false"
                 tools:context=".MainActivityFragment">
 
-
-
     <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/swipe_view"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:clipToPadding="false"
             android:background="@color/md_grey_300"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
 
         <android.support.v7.widget.RecyclerView
+                android:id="@+id/list_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/list_view"
-                android:clipToPadding="false"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:clipToPadding="false"
                 android:paddingBottom="75dp"
                 android:paddingTop="20dp"
                 />

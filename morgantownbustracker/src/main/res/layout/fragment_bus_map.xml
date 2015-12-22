@@ -3,6 +3,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:context=".BusMapFragment"
+                android:background="@color/md_grey_500"
         >
     <FrameLayout
             android:layout_width="match_parent"
@@ -17,8 +18,6 @@
         <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
-
-
 
     </com.flipboard.bottomsheet.BottomSheetLayout>
 

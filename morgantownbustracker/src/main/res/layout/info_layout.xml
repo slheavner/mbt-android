@@ -17,28 +17,19 @@
 
     <com.slheavner.wvubus.views.StatusView
             android:id="@+id/info.bus_one"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:clickable="false"
-            android:focusable="false">
+            style="@style/StatusView"
+            android:layout_marginBottom="6dp">
 
     </com.slheavner.wvubus.views.StatusView>
     <com.slheavner.wvubus.views.StatusView
             android:id="@+id/info.bus_two"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="false"
-            android:focusable="false"
+            style="@style/StatusView"
             android:layout_marginBottom="6dp">
 
     </com.slheavner.wvubus.views.StatusView>
     <com.slheavner.wvubus.views.StatusView
             android:id="@+id/info.bus_three"
-            android:layout_width="match_parent"
-            android:clickable="false"
-            android:focusable="false"
-            android:layout_height="wrap_content"/>
+            style="@style/StatusView"/>
     <TextView
             style="@style/Info.Header"
             android:text="@string/info.service"

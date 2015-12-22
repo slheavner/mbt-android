@@ -10,24 +10,21 @@
 
 
     <TextView
-            style="@style/CardView.Bus.Number"
-            android:id="@+id/status_number"
-            android:text="Bus 666"/>
+            style="@style/StatusView.Number"
+            android:id="@+id/status_number"/>
 
 
     <TextView
-            style="@style/CardView.Bus.Time"
-            android:id="@+id/status_time"
-            android:text="30 sec"/>
+            style="@style/StatusView.Time"
+            android:id="@+id/status_time"/>
 
     <TextView
-            style="@style/CardView.Bus.Status"
+            style="@style/StatusView.Status"
             android:id="@+id/status_status"
-            android:layout_below="@id/status_time"
-            android:text="On its way to the downtown campus this is a status for a test blab bla bla http://google.com"/>
-
+            android:layout_below="@id/status_time"/>
+            
     <View
-            style="@style/CardView.Bus.Divider"
+            style="@style/StatusView.Divider"
             android:id="@+id/status_divider"
             android:layout_below="@id/status_status" />
 

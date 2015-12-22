@@ -2,7 +2,7 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/md_light_blue_900</item>
+        <item name="colorPrimary">@color/blue.primary</item>
         <item name="colorAccent">@color/md_light_blue_500</item>
         <item name="preferenceTheme">@style/MyPrefTheme</item>
         <!-- Set theme colors from http://www.google.com/design/spec/style/color.html#color-color-palette-->
@@ -13,16 +13,10 @@
         <item name="android:background">@color/md_white</item>
     </style>
 
-    <style name="AboutText">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textAlignment">center</item>
-        <item name="android:gravity">center</item>
-    </style>
-
     <style name="Info">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <style name="Info.Header" parent="Info">
@@ -50,7 +44,7 @@
         <item name="android:paddingRight">10dp</item>
         <item name="android:paddingLeft">10dp</item>
         <item name="android:elevation">5dp</item>
-        <item name="android:background">@color/md_light_blue_900</item>
+        <item name="android:background">@color/blue.primary</item>
     </style>
     <style name="CardView.Name" parent="CardView.Title.Text">
         <item name="android:layout_width">wrap_content</item>
@@ -69,7 +63,14 @@
         <item name="android:elevation">0dp</item>
     </style>
 
-    <style name="CardView.Bus.Time" parent="">
+    <style name="StatusView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:clickable">false</item>
+        <item name="android:focusable">false</item>
+    </style>
+
+    <style name="StatusView.Time">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentRight">true</item>
@@ -80,7 +81,7 @@
         <item name="android:clickable">false</item>
         <item name="android:focusable">false</item>
     </style>
-    <style name="CardView.Bus.Number" parent="">
+    <style name="StatusView.Number">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentLeft">true</item>
@@ -90,7 +91,7 @@
         <item name="android:clickable">false</item>
         <item name="android:focusable">false</item>
     </style>
-    <style name="CardView.Bus.Status" parent="">
+    <style name="StatusView.Status">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentLeft">true</item>
@@ -100,13 +101,70 @@
         <item name="android:clickable">false</item>
         <item name="android:focusable">false</item>
     </style>
-    <style name="CardView.Bus.Divider" parent="">
+    <style name="StatusView.Divider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
         <item name="android:layout_margin">10dp</item>
         <item name="android:background">@android:color/darker_gray</item>
         <item name="android:clickable">false</item>
         <item name="android:focusable">false</item>
+    </style>
+
+
+
+    <style name="About">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+
+    <style name="About.Text">
+        <item name="android:gravity">left</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:padding">25dp</item>
+    </style>
+    <style name="About.Image">
+        <item name="android:layout_width">200dp</item>
+        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_marginBottom">40dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:elevation">7dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">@color/md_grey_200</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+    <style name="About.Header">
+        <item name="android:textAlignment">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:elevation">7dp</item>
+        <item name="android:textColor">@color/md_white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@color/yellow.secondary</item>
+        <item name="android:padding">15dp</item>
+    </style>
+    <style name="LicenseHeader">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:elevation">4dp</item>
+        <item name="android:background">@color/md_grey_300</item>
+    </style>
+    <style name="LicenseText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">8dp</item>
+    </style>
+    <style name="MainActionButton" parent="Widget.Design.FloatingActionButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">16dp</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:tint">@color/md_white</item>
     </style>
 
 </resources>

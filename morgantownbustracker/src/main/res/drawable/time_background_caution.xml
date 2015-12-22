@@ -12,6 +12,6 @@
             android:bottom="3dp"
             />
     <solid
-        android:color="@color/md_yellow_200"/>
+        android:color="@color/md_yellow_800"/>
 
 </shape>

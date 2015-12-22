@@ -9,39 +9,39 @@ import android.support.v4.content.SharedPreferencesCompat;
 import com.slheavner.wvubus.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by Sam on 12/14/2015.
+ *
+ * Convenience Class for accessing Preferences
  */
 public class PrefsUtil {
     private SharedPreferences prefs;
     private Resources resources;
+
     public PrefsUtil(Activity activity){
         this.prefs = activity.getPreferences(Context.MODE_PRIVATE);
         this.resources = activity.getResources();
     }
 
-    public HashMap<String, Boolean> getBusEnabled(){
-        HashMap<String, Boolean> map = new HashMap<String, Boolean>();
-        for(String id : resources.getStringArray(R.array.bus_ids)){
-            map.put(id, prefs.getBoolean(id, false));
-        }
-        return map;
-    }
-
+    /**
+     * Get a full array of enabled states for all bus ids in order
+     * @return boolean array of enabled states in order of bus id
+     */
     public boolean[] getBusEnabledBool(){
         String[] busIds = resources.getStringArray(R.array.bus_ids);
-        boolean[] bools = new boolean[busIds.length];
-        int counter = 0;
-        for(String id : busIds){
-            bools[counter] = prefs.getBoolean(id, false);
-            counter++;
+        boolean[] enabled = new boolean[busIds.length];
+        for(int i = 0; i < busIds.length; i++){
+            enabled[i] = prefs.getBoolean(busIds[i], false);
         }
-        return bools;
+        return enabled;
     }
 
+    /**
+     * Get a list of only the buses that are enabled
+     * @return List of enabled buses only
+     */
     public List<String> onlyEnabled(){
         List<String> idList = new ArrayList<String>();
         for(String s : resources.getStringArray(R.array.bus_ids)){
@@ -51,41 +51,21 @@ public class PrefsUtil {
         }
         return idList;
     }
-    public List<String> onlyEnabled(SharedPreferences sp){
-        List<String> idList = new ArrayList<String>();
-        for(String s : resources.getStringArray(R.array.bus_ids)){
-            if(isEnabled(s, sp)){
-                idList.add(s);
-            }
-        }
-        return idList;
-    }
 
+    /**
+     * Return whether a busId is enabled
+     * @param busId id to check
+     * @return true if enabled
+     */
     public boolean isEnabled(String busId){
         return prefs.getBoolean(busId, false);
     }
 
-    public boolean isEnabled(String busId, SharedPreferences sp){
-        return sp.getBoolean(busId, false);
-    }
-
-    public void setBusEnabled(String id, boolean bool){
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putBoolean(id, bool);
-        apply(editor);
-    }
-
-
-    public void setBusEnabled(HashMap<String, Boolean> map){
-        SharedPreferences.Editor editor = prefs.edit();
-        for(String key : map.keySet()){
-            editor.putBoolean(key, map.get(key));
-        }
-        apply(editor);
-    }
-
-
-    public void setBusEnabled(boolean[] bool){
+    /**
+     * Save a bus as enabled in preferences
+     * @param bool boolean array of bus states
+     */
+    public void setBusesEnabled(boolean[] bool){
         SharedPreferences.Editor editor = prefs.edit();
         int counter = 0;
         for(String id : resources.getStringArray(R.array.bus_ids)){
@@ -95,21 +75,41 @@ public class PrefsUtil {
         apply(editor);
     }
 
-    public void apply(SharedPreferences.Editor editor){
+    private void apply(SharedPreferences.Editor editor){
         SharedPreferencesCompat.EditorCompat.getInstance().apply(editor);
     }
 
+    /**
+     * Get Main color preference
+     * @param context Context for prefs
+     * @return true if should use colors
+     */
     public static boolean useColorMain(Context context){
         return PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean("colors_main", false);
+                .getBoolean(context.getResources()
+                        .getString(R.string.colors_main_key), false);
     }
+
+    /**
+     * Get Map route color preference
+     * @param context Context for prefs
+     * @return true if should use colors
+     */
     public static boolean useColorMap(Context context){
         return PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean("colors_map", false);
+                .getBoolean(context.getResources()
+                        .getString(R.string.colors_map_key), false);
     }
+
+    /**
+     * Get Info Sheet color preference
+     * @param context Context for prefs
+     * @return true if should use colors
+     */
     public static boolean useColorInfo(Context context){
         return PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean("colors_info", false);
+                .getBoolean(context.getResources()
+                        .getString(R.string.colors_info_key), false);
     }
 
 }

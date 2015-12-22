@@ -9,15 +9,17 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import com.slheavner.wvubus.R;
 
 /**
  * Created by Sam on 12/18/2015.
+ *
+ * The about page, displays a description, a link to Github, and required licenses.
  */
 public class AboutFragment extends Fragment {
 
+    public final static String TAG = AboutFragment.class.getSimpleName();
     final String description = "&emsp;This app was made out of a need to track the buses around Morgantown. " +
             "The owner, Samuel Heavner, also made it because of his love of programming. Any and all feedback " +
             "is welcomed with open arms." +
@@ -30,16 +32,20 @@ public class AboutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.about, null);
         ((TextView) root.findViewById(R.id.about_desc)).setText(Html.fromHtml(description));
-        ((ImageButton)root.findViewById(R.id.about_github)).setOnClickListener(new View.OnClickListener() {
+        root.findViewById(R.id.about_github).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "https://github.com/slheavner";
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
+                githubIntent();
             }
         });
         return root;
+    }
+
+    private void githubIntent(){
+        String url = "https://github.com/slheavner";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
     }
 
 

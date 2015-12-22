@@ -6,6 +6,9 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Bus model. Must be compatible with /res/raw/buses.json
+ */
 public class Bus {
 
     private String id;
@@ -128,11 +131,11 @@ public class Bus {
         this.number = number;
     }
 
-    public String get_id() {
+    public String getId() {
         return id;
     }
 
-    public void set_id(String _id) {
+    public void setId(String _id) {
         this.id = _id;
     }
 
@@ -224,7 +227,7 @@ public class Bus {
     public boolean equals(Object o) {
         if(o instanceof Bus){
             Bus cBus = (Bus) o;
-            if(!this.id.equals(((Bus) o).get_id())){
+            if(!this.id.equals(((Bus) o).getId())){
                 return false;
             }
             for(int i = 0; i < locations.length; i++){

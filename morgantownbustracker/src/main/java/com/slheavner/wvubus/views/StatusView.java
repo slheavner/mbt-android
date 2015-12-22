@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -16,12 +15,18 @@ import java.util.Locale;
 
 /**
  * Created by Sam on 12/14/2015.
+ *
+ * View for showing individual statuses of buses. Each card has up to 3. Use com.slheavner.wvubus.views.StatusView in
+ * xml
+ * TODO: cleanup time logic.
  */
 public class StatusView extends RelativeLayout{
 
+    protected final static String
+            KEY_TIME_STRING = "KEY_TIME_STRING",
+            KEY_TIME_COLOR = "KEY_TIME_COLOR";
     private TextView number, time, status;
     private View divider;
-    private int index = -1;
     protected TimeHandler timeHandler;
     boolean calculate = true;
     protected TimeThread timeThread;
@@ -50,14 +55,20 @@ public class StatusView extends RelativeLayout{
         this.timeHandler = new TimeHandler(this);
     }
 
-    public int getIndex() {
-        return index;
-    }
 
-    public void setIndex(int i){
-        this.index = i;
-        if(i == 3){
-            this.hideDivider();
+    /**
+     * Set this statusView's location. Will start time thread.
+     * @param location
+     * @param id
+     */
+    public void setLocation(Bus.Location location, String id){
+        this.setStatus(location.getDesc());
+        if(id.equals("prt")){
+            this.setNumber("");
+            this.setTime(location.getBus(), id);
+        }else{
+            this.setNumber("Bus " + location.getBus());
+            this.setTime(location.getTime(), id);
         }
     }
 
@@ -82,7 +93,6 @@ public class StatusView extends RelativeLayout{
     }
 
     private void setTime(long time, String id) {
-
         if(id.equals("prt")){
             calculate = false;
             if(time == 0){
@@ -100,8 +110,8 @@ public class StatusView extends RelativeLayout{
             }else{
                 timeThread.setTime(time);
                 Message msg = timeThread.getTimeString();
-                this.time.setText(msg.getData().getString("timeString"));
-                this.time.setBackgroundResource(msg.getData().getInt("colorId"));
+                this.time.setText(msg.getData().getString(KEY_TIME_STRING));
+                this.time.setBackgroundResource(msg.getData().getInt(KEY_TIME_COLOR));
             }
         }
     }
@@ -114,6 +124,9 @@ public class StatusView extends RelativeLayout{
         this.status.setText(status);
     }
 
+    /**
+     * Handles messages from the TimeThread to set the time textviews.
+     */
     static class TimeHandler extends Handler{
         StatusView sv;
         public TimeHandler(StatusView sv) {
@@ -124,17 +137,20 @@ public class StatusView extends RelativeLayout{
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             Bundle data = msg.getData();
-            sv.time.setText(data.getString("timeString"));
-            sv.time.setBackgroundResource(data.getInt("colorId"));
+            sv.time.setText(data.getString(KEY_TIME_STRING));
+            sv.time.setBackgroundResource(data.getInt(KEY_TIME_COLOR));
         }
     }
 
+    /**
+     * Thread for handling time updates every second on the UI Thread. Sends to the TimeHandler.
+     */
     class TimeThread extends Thread{
         int time;
         public TimeThread(long time) {
             this.time = (int) ((System.currentTimeMillis() - time) / 1000);
-            Log.d("mbt", "time diff = " + this.time);
-            Log.d("mbt", "currenttime = " + System.currentTimeMillis());
+//            Log.d("mbt", "time diff = " + this.time);
+//            Log.d("mbt", "currenttime = " + System.currentTimeMillis());
         }
 
         public void setTime(long time){
@@ -161,8 +177,8 @@ public class StatusView extends RelativeLayout{
                 colorId = R.drawable.time_background_bad;
             }
             Bundle b = new Bundle();
-            b.putString("timeString", timeString);
-            b.putInt("colorId", colorId);
+            b.putString(KEY_TIME_STRING, timeString);
+            b.putInt(KEY_TIME_COLOR, colorId);
             msg.setData(b);
             return msg;
         }
@@ -179,16 +195,5 @@ public class StatusView extends RelativeLayout{
             }
         }
 
-    }
-
-    public void setLocation(Bus.Location location, String id){
-        this.setStatus(location.getDesc());
-        if(id.equals("prt")){
-            this.setNumber("");
-            this.setTime(location.getBus(), id);
-        }else{
-            this.setNumber("Bus " + location.getBus());
-            this.setTime(location.getTime(), id);
-        }
     }
 }

@@ -8,9 +8,11 @@ import com.slheavner.wvubus.R;
 
 /**
  * Created by Sam on 12/18/2015.
+ *
+ * The settings fragment. Uses support library
  */
 public class SettingsFragment extends PreferenceFragmentCompat {
-    private static final String TAG = SettingsFragment.class.getSimpleName();
+    public static final String TAG = SettingsFragment.class.getSimpleName();
 
     SharedPreferences sharedPreferences;
 

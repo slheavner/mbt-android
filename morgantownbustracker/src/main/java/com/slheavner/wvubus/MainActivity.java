@@ -1,14 +1,11 @@
 package com.slheavner.wvubus;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,13 +18,16 @@ import com.flipboard.bottomsheet.OnSheetDismissedListener;
 import com.google.android.gms.maps.MapView;
 import com.slheavner.wvubus.fragments.*;
 import com.slheavner.wvubus.models.Bus;
-import com.slheavner.wvubus.models.CardController;
+import com.slheavner.wvubus.utils.CardHelper;
 import com.slheavner.wvubus.utils.FragmentController;
+import com.slheavner.wvubus.utils.Logger;
 import com.slheavner.wvubus.utils.PrefsUtil;
 import com.slheavner.wvubus.views.StatusView;
 
 public class MainActivity extends AppCompatActivity
-        implements View.OnClickListener, OnSheetDismissedListener, FragmentManager.OnBackStackChangedListener {
+        implements View.OnClickListener, OnSheetDismissedListener, FragmentManager.OnBackStackChangedListener,
+        FragmentController.FragmentTransactionListener, BusMapFragment.BusMapFragmentListener,
+        BusSelectDialogFragment.BusSelectClosedListener{
 
     private FloatingActionButton button;
     private BusMapFragment mapFragment;
@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity
         hideOnSlideEndListener = new HideOnSlideEndListener(button);
         slideOut.setAnimationListener(hideOnSlideEndListener);
         mainFragment = (MainActivityFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
+        //Google Maps preload for better transition to map fragment
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -62,54 +63,43 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onPostResume() {
-        super.onPostResume();
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             showPreferencesFragment();
             return true;
         }else if(id == android.R.id.home){
-            NavUtils.navigateUpFromSameTask(this);
+            this.onBackPressed();
             return true;
         }else if(id == R.id.action_about){
-            this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             showAboutFragment();
         }
-
         return super.onOptionsItemSelected(item);
     }
-
-
 
     public void floatingButtonClick(View view){
         View mapInfo = this.findViewById(R.id.map_info_sheet);
         if(mapInfo != null && mapInfo.getVisibility() == View.VISIBLE){
-            BottomSheetLayout bottomSheet = (BottomSheetLayout) mapInfo;
-            bottomSheet.addOnSheetDismissedListener(this);
-            View sheet = LayoutInflater.from(this).inflate(R.layout.info_layout, bottomSheet, false);
-            createInfoSheet(sheet, (Bus) view.getTag());
-            bottomSheet.setPeekSheetTranslation(bottomSheet.getMaxSheetTranslation() / 2);
-            bottomSheet.showWithSheetView(sheet);
             buttonSlideOut(button);
+            BottomSheetLayout bottomSheet = (BottomSheetLayout) mapInfo;
+            if(bottomSheet.isSheetShowing()){
+                bottomSheet.dismissSheet();
+            }else{
+                bottomSheet.addOnSheetDismissedListener(this);
+                View sheet = LayoutInflater.from(this).inflate(R.layout.info_layout, bottomSheet, false);
+                createInfoSheet(sheet, (Bus) view.getTag());
+                bottomSheet.setPeekSheetTranslation(bottomSheet.getMaxSheetTranslation() / 2);
+                bottomSheet.showWithSheetView(sheet);
+            }
         }else{
-            DialogFragment df = new AddBusDialog();
+            DialogFragment df = BusSelectDialogFragment.newInstance(this);
             df.show(getSupportFragmentManager(), "busesSelect");
         }
     }
@@ -128,7 +118,7 @@ public class MainActivity extends AppCompatActivity
         statusViews[0] = (StatusView) sheet.findViewById(R.id.info_bus_one);
         statusViews[1] = (StatusView) sheet.findViewById(R.id.info_bus_two);
         statusViews[2] = (StatusView) sheet.findViewById(R.id.info_bus_three);
-        CardController.setLocations(bus, statusViews);
+        CardHelper.setLocations(bus, statusViews);
     }
 
     private TextView getTextView(View v, int id){
@@ -136,36 +126,39 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void showBusMap(Bus bus){
-        FragmentController.setMainFragment(this, BusMapFragment.newInstance(bus), BusMapFragment.TAG, true);
+        BusMapFragment busMapFragment = BusMapFragment.newInstance(bus);
+        busMapFragment.setBusMapFragmentListener(this);
+        FragmentController.setMainFragment(this, busMapFragment, BusMapFragment.TAG, true);
         switchButtonIcon(button, R.drawable.ic_view_list_white_24dp);
     }
 
     private void showPreferencesFragment(){
-        SettingsFragment sf = (SettingsFragment) getSupportFragmentManager().findFragmentByTag("Preferences");
-        if(sf == null){
-            sf = new SettingsFragment();
+        SettingsFragment settingsFragment = (SettingsFragment) getSupportFragmentManager().findFragmentByTag(SettingsFragment.TAG);
+        if(settingsFragment == null){
+            settingsFragment = new SettingsFragment();
         }
-        FragmentController.setMainFragment(this, sf, "Preferences", true);
-        buttonSlideOut(button);
-
+        if(!settingsFragment.isVisible()){
+            FragmentController.setMainFragment(this, settingsFragment, SettingsFragment.TAG, true);
+            buttonSlideOut(button);
+        }
     }
 
     private void showAboutFragment(){
-        AboutFragment sf = (AboutFragment) getSupportFragmentManager().findFragmentByTag("About");
-        if(sf == null){
-            sf = new AboutFragment();
+        AboutFragment aboutFragment = (AboutFragment) getSupportFragmentManager().findFragmentByTag(AboutFragment.TAG);
+        if(aboutFragment == null){
+            aboutFragment = new AboutFragment();
         }
-        FragmentController.setMainFragment(this, sf, "About", true);
-        buttonSlideOut(button);
-
+        if(!aboutFragment.isVisible()){
+            FragmentController.setMainFragment(this, aboutFragment, AboutFragment.TAG, true);
+            buttonSlideOut(button);
+        }
     }
 
     @Override
     public void onClick(View v) {
-        Log.d("mbt", "MainActivity on click");
+        Logger.debug(this, "MainActivity on click");
         Object tag = v.getTag();
         if(tag instanceof Bus){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             showBusMap((Bus) tag);
         }
     }
@@ -177,8 +170,10 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackStackChanged() {
-        if(getSupportFragmentManager().getBackStackEntryCount() == 0 && this.findViewById(R.id.swipe_view) != null){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        if(getSupportFragmentManager().getBackStackEntryCount() > 0){
+            showBackButton(true);
+        }else{
+            showBackButton(false);
             if(button.isShown()){
                 switchButtonIcon(button, android.R.drawable.ic_input_add);
             }else{
@@ -188,21 +183,53 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+
+
     public void switchButtonIcon(FloatingActionButton button, int resource){
         slideOut.setAnimationListener(new SwitchAnimationListener(button, resource));
         buttonSlideOut(button);
     }
 
     public void buttonSlideOut(FloatingActionButton button){
-        button.startAnimation(slideOut);
+        if(button.isShown()){
+            button.startAnimation(slideOut);
+        }
     }
 
     public void buttonSlideIn(FloatingActionButton button, int resource){
-        button.setVisibility(View.VISIBLE);
         if(resource != 0){
             button.setImageResource(resource);
         }
-        button.startAnimation(slideIn);
+        if(!button.isShown()){
+            button.setVisibility(View.VISIBLE);
+            button.startAnimation(slideIn);
+        }
+    }
+
+    @Override
+    public void onTransaction(String oldTag, String newTag) {
+        //do something
+    }
+
+    @Override
+    public void onMapResume() {
+        if(!button.isShown()){
+            buttonSlideIn(button, R.drawable.ic_view_list_white_24dp);
+        }
+    }
+
+    private void showBackButton(boolean show){
+        ActionBar bar = getSupportActionBar();
+        if(bar != null){
+            bar.setDisplayHomeAsUpEnabled(show);
+        }
+    }
+
+    @Override
+    public void onSave() {
+        if(mainFragment != null){
+            mainFragment.updateAdapter();
+        }
     }
 
     private class HideOnSlideEndListener implements Animation.AnimationListener{
@@ -246,8 +273,9 @@ public class MainActivity extends AppCompatActivity
 
         @Override
         public void onAnimationEnd(Animation animation) {
-            buttonSlideIn(button, this.r);
+            button.setVisibility(View.INVISIBLE);
             animation.setAnimationListener(MainActivity.this.hideOnSlideEndListener);
+            buttonSlideIn(button, this.r);
         }
 
         @Override

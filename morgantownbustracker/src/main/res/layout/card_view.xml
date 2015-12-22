@@ -28,36 +28,21 @@
                     style="@style/CardView.Name"
                     android:id="@+id/card.title.name"/>
         </RelativeLayout>
+
         <com.slheavner.wvubus.views.StatusView
+                style="@style/StatusView"
                 android:id="@+id/bus_one"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp"
-                android:clickable="false"
-                android:focusable="false">
+                android:layout_marginBottom="6dp"/>
 
-        </com.slheavner.wvubus.views.StatusView>
         <com.slheavner.wvubus.views.StatusView
+                style="@style/StatusView"
                 android:id="@+id/bus_two"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="false"
-                android:focusable="false"
-                android:layout_marginBottom="6dp">
+                android:layout_marginBottom="6dp"/>
 
-        </com.slheavner.wvubus.views.StatusView>
         <com.slheavner.wvubus.views.StatusView
-                android:id="@+id/bus_three"
-                android:layout_width="match_parent"
-                android:clickable="false"
-                android:focusable="false"
-                android:layout_height="wrap_content">
-
-        </com.slheavner.wvubus.views.StatusView>
+                style="@style/StatusView"
+                android:id="@+id/bus_three"/>
 
     </LinearLayout>
-
-
-
 
 </android.support.v7.widget.CardView>

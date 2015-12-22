@@ -4,10 +4,6 @@
                 android:layout_height="match_parent"
                 xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-
-
-
     <fragment
             android:id="@+id/fragment"
             android:name="com.slheavner.wvubus.fragments.MainActivityFragment"
@@ -15,20 +11,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
-
     <android.support.design.widget.FloatingActionButton
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            style="@style/MainActionButton"
             android:id="@+id/add_button"
+            app:backgroundTint="@color/yellow.primary"
             android:src="@android:drawable/ic_input_add"
-            app:backgroundTint="@color/md_yellow_700"
-            android:tint="@color/md_white"
-            android:onClick="floatingButtonClick"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"/>
+            android:onClick="floatingButtonClick"/>
 
 </RelativeLayout>
 

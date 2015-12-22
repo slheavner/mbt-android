@@ -3,12 +3,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:background="@color/md_white"
-        >
+                android:background="@color/md_white">
 
     <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingBottom="50dp"
+            android:clipToPadding="false">
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -16,33 +17,54 @@
                 android:orientation="vertical">
 
             <TextView
+                    style="@style/About.Header"
                     android:id="@+id/about.header"
-                    android:padding="30dp"
-                    android:textAlignment="center"
-                    android:gravity="center"
-                    android:textSize="26sp"
-                    android:textStyle="bold"
-                    android:background="@color/md_grey_300"
-                    style="@style/AboutText"
                     android:text="@string/about.header"/>
             <TextView
-                    style="@style/AboutText"
-                    android:gravity="left"
-                    android:textSize="20sp"
-                    android:id="@+id/about.desc"
-                    android:padding="25dp"/>
+                    style="@style/About.Text"
+                    android:id="@+id/about.desc"/>
             <ImageButton
+                    style="@style/About.Image"
                     android:id="@+id/about.github"
-                    android:layout_gravity="center_horizontal"
-                    android:clickable="true"
-                    android:layout_width="200dp"
-                    android:layout_height="100dp"
-                    android:background="@color/md_grey_200"
-                    android:scaleType="fitCenter"
                     android:src="@drawable/github_logo"/>
 
+            <TextView
+                    style="@style/About.Header"
+                    android:id="@+id/about.license"
+                    android:text="@string/about.license"/>
+            
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                <TextView
+                        style="@style/LicenseHeader"
+                        android:text="@string/about.colors"/>
+                <TextView
+                        style="@style/LicenseText"
+                        android:text="@string/about.colors.license"/>
+
+                <TextView
+                        style="@style/LicenseHeader"
+                        android:text="@string/about.gson"/>
+                <TextView
+                        style="@style/LicenseText"
+                        android:text="@string/about.gson.license"/>
+
+                <TextView
+                        style="@style/LicenseHeader"
+                        android:text="@string/about.okhttp"/>
+                <TextView
+                        style="@style/LicenseText"
+                        android:text="@string/about.okhttp.license"/>
+
+                <TextView
+                        style="@style/LicenseHeader"
+                        android:text="@string/about.bottomsheet"/>
+                <TextView
+                        style="@style/LicenseText"
+                        android:text="@string/about.bottomsheet.license"/>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
-
 </RelativeLayout>
