@@ -42,7 +42,7 @@ public class AboutFragment extends Fragment {
     }
 
     private void githubIntent(){
-        String url = "https://github.com/slheavner";
+        String url = "https://github.com/slheavner/mbt-android";
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
         startActivity(i);

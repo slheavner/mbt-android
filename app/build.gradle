@@ -21,8 +21,8 @@ android {
         applicationId "com.slheavner.wvubus"
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode 20
-        versionName "3.0"
+        versionCode 18
+        versionName "3.0.0"
     }
 
     compileOptions {
