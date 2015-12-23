@@ -11,8 +11,8 @@ The project requires a Bus API URL and a Google Maps API Key as string resources
   <string name="mbt.url.api">BUS_API_URL</string>
   <string name="google.map.key">API_KEY</string>
 ```
-
-If you would like to contribute before I get the new api project on github, message me and I will give you a url to use for the api. 
+The project also needs an API to talk to, which is the [mbt-api repository](https://github.com/slheavner/mbt-api)  
+Follow the setup instructions there to setup your own API service.
 
 -----
 ##### About
