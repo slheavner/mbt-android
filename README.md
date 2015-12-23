@@ -4,6 +4,8 @@
 #### [Play Store](https://play.google.com/store/apps/details?id=com.slheavner.wvubus) | [Website](http://morgantownbustracker.org) ![Alt text](/app/src/main/res/drawable-xxxhdpi/ic_launcher.png?raw=true "mbt-android logo")
 -----
 ### mbt-android
+Other compenents
+* [mbt-api](https://github.com/slheavner/mbt-api)
 
 ##### Setup
 The project requires a Bus API URL and a Google Maps API Key as string resources
