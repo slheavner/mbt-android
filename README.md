@@ -1,7 +1,7 @@
 # Morgantown Bus & PRT Tracker 
 ###### Official Android repository
 
-#### [Play Store](https://play.google.com/store/apps/details?id=com.slheavner.wvubus) | [Website](http://morgantownbustracker.org) ![Alt text](/app/src/main/res/drawable-xxxhdpi/ic_launcher.png?raw=true "mbt-android logo")
+#### [Play Store](https://play.google.com/store/apps/details?id=com.slheavner.wvubus) | [App Store](https://itunes.apple.com/us/app/morgantown-bus-prt-tracker/id993385664?ls=1&mt=8) | [Website](http://morgantownbustracker.org) ![Alt text](https://raw.github.com/slheavner/mbt-android/master/app/src/main/res/drawable-xxxhdpi/ic_launcher.png "mbt-android logo")
 -----
 ### mbt-android
 Other compenents
