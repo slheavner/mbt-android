@@ -1,0 +1,166 @@
+<resources>
+    <!--Main app strings-->
+    <string name="app_name">Morgantown Bus tracker</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_about">About</string>
+
+    <!--Information sheet headers-->
+    <string name="info.service">Service</string>
+    <string name="info.firstrun">First Run</string>
+    <string name="info.lastrun">Last Run</string>
+    <string name="info.runtime">Run Time</string>
+
+    <!--Preference strings-->
+    <string name="colors.category">Color Settings</string>
+    <string name="colors.main">Main Screen</string>
+    <string name="colors.main.key">colors_main</string>
+    <string name="colors.main.summary">Use individual colors for card headers on the main page</string>
+    <string name="colors.map">Map Route</string>
+    <string name="colors.map.key">colors_map</string>
+    <string name="colors.map.summary">Use individual colors for routes in Google Maps</string>
+    <string name="colors.info">Map Info</string>
+    <string name="colors.info.key">colors_info</string>
+    <string name="colors.info.summary">Use individual colors for the header on the information panel</string>
+
+    <!--About headers-->
+    <string name="about.header">About this App</string>
+    <string name="about.license">Licenses</string>
+
+    <!--Licenses-->
+    <string name="about.colors">Android Material Design Colors</string>
+    <string name="about.colors.license">Copyright 2014 wada811\n\n
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at\n\n
+            \thttp://www.apache.org/licenses/LICENSE-2.0\n\n
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.</string>
+
+    <string name="about.gson">Gson</string>
+    <string name="about.gson.license">Copyright 2008 Google Inc.\n\n
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at\n\n
+            \thttp://www.apache.org/licenses/LICENSE-2.0\n\n
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.</string>
+
+    <string name="about.okhttp">OkHttp</string>
+    <string name="about.okhttp.license">Copyright 2014 Square, Inc.\n\n
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at\n\n
+            \thttp://www.apache.org/licenses/LICENSE-2.0\n\n
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.</string>
+    
+    <string name="about.bottomsheet">BottomSheet</string>
+    <string name="about.bottomsheet.license">Copyright © 2015, Flipboard
+        All rights reserved.\n\n
+        THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+        ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+        WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+        DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+        ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+        (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+        LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+        ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+        (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+        SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</string>
+
+    <string name="about.animators">RecyclerView Animators</string>
+    <string name="about.animators.license">Copyright 2015 Wasabeef\n\n
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at\n\n
+           \thttp://www.apache.org/licenses/LICENSE-2.0\n\n
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.</string>
+
+
+    <!--Bus string data-->
+    <string-array name="bus_ids">
+        <item>prt</item>
+        <item>mlcampuspm</item>
+        <item>mlmallpm</item>
+        <item>ml03green</item>
+        <item>ml04orange</item>
+        <item>ml06gold</item>
+        <item>ml07red</item>
+        <item>ml08tyrone</item>
+        <item>mlpurplepink</item>
+        <item>ml11cass</item>
+        <item>ml12blue</item>
+        <item>ml10brown</item>
+        <item>ml30wr</item>
+        <item>ml38bg</item>
+        <item>ml44vv</item>
+    </string-array>
+
+    <string-array name="bus_names">
+        <item>PRT Status</item>
+        <item>Campus PM</item>
+        <item>Mall PM</item>
+        <item>Green Line</item>
+        <item>Orange Line</item>
+        <item>Gold Line</item>
+        <item>Red Line</item>
+        <item>Tyrone</item>
+        <item>Purple/Pink</item>
+        <item>Cassville</item>
+        <item>Blue Line</item>
+        <item>Crown/Graft/MtnHts</item>
+        <item>West Run</item>
+        <item>Blue Gold</item>
+        <item>Valley View</item>
+    </string-array>
+
+    <string-array name="bus_full">
+        <item>PRT Status</item>
+        <item>01 - Campus PM</item>
+        <item>02 - Mall PM</item>
+        <item>03 - Green Line</item>
+        <item>04 - Orange Line</item>
+        <item>05 - Gold Line</item>
+        <item>07 - Red Line</item>
+        <item>08 - Tyrone</item>
+        <item>09/16 - Purple/Pink</item>
+        <item>11 - Cassville</item>
+        <item>12 - Blue Line</item>
+        <item>13/14/15 - Crown/Graft/MtnHts</item>
+        <item>30 - West Run</item>
+        <item>38 - Blue Gold</item>
+        <item>44 - Valley View</item>
+    </string-array>
+
+
+    <string-array name="bus_numbers">
+        <item>  </item>
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09/16</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13/14/15</item>
+        <item>30</item>
+        <item>38</item>
+        <item>44</item>
+    </string-array>
+</resources>

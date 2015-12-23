@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+                android:background="@android:color/white">
+    <RelativeLayout
+            android:id="@+id/map.info"
+            style="@style/CardView.Title">
+        <TextView
+                android:id="@+id/map.info.name"
+                style="@style/CardView.Name"/>
+        <TextView
+                style="@style/CardView.Number"
+                android:id="@+id/map.info.number"/>
+    </RelativeLayout>
+
+    <com.slheavner.wvubus.views.StatusView
+            android:id="@+id/info.bus_one"
+            style="@style/StatusView"
+            android:layout_marginBottom="6dp">
+
+    </com.slheavner.wvubus.views.StatusView>
+    <com.slheavner.wvubus.views.StatusView
+            android:id="@+id/info.bus_two"
+            style="@style/StatusView"
+            android:layout_marginBottom="6dp">
+
+    </com.slheavner.wvubus.views.StatusView>
+    <com.slheavner.wvubus.views.StatusView
+            android:id="@+id/info.bus_three"
+            style="@style/StatusView"/>
+    <TextView
+            style="@style/Info.Header"
+            android:text="@string/info.service"
+            android:id="@+id/map.info.service.header"/>
+    <TextView
+            style="@style/Info.Text"
+            android:id="@+id/map.info.service.text"/>
+
+
+    <TextView
+            style="@style/Info.Header"
+            android:text="@string/info.firstrun"
+            android:id="@+id/map.info.firstrun.header"/>
+    <TextView
+            style="@style/Info.Text"
+            android:id="@+id/map.info.firstrun.text"/>
+
+
+    <TextView
+            style="@style/Info.Header"
+            android:text="@string/info.lastrun"
+            android:id="@+id/map.info.lastrun.header"/>
+    <TextView
+            style="@style/Info.Text"
+            android:id="@+id/map.info.lastrun.text"/>
+
+    <TextView
+            style="@style/Info.Header"
+            android:text="@string/info.runtime"
+            android:id="@+id/map.info.runtime.header"/>
+    <TextView
+            style="@style/Info.Text"
+            android:id="@+id/map.info.runtime.text"/>
+
+
+
+</LinearLayout>

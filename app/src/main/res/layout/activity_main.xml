@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <fragment
+            android:id="@+id/fragment"
+            android:name="com.slheavner.wvubus.fragments.MainActivityFragment"
+            tools:layout="@layout/fragment_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    <android.support.design.widget.FloatingActionButton
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            style="@style/MainActionButton"
+            android:id="@+id/add_button"
+            app:backgroundTint="@color/yellow.primary"
+            android:src="@android:drawable/ic_input_add"
+            android:onClick="floatingButtonClick"/>
+
+</RelativeLayout>
+
+
+
+

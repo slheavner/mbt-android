@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"
+                android:clipToPadding="false"
+                >
+
+
+    <TextView
+            style="@style/StatusView.Number"
+            android:id="@+id/status_number"/>
+
+
+    <TextView
+            style="@style/StatusView.Time"
+            android:id="@+id/status_time"/>
+
+    <TextView
+            style="@style/StatusView.Status"
+            android:id="@+id/status_status"
+            android:layout_below="@id/status_time"/>
+            
+    <View
+            style="@style/StatusView.Divider"
+            android:id="@+id/status_divider"
+            android:layout_below="@id/status_status" />
+
+</RelativeLayout>
