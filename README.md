@@ -9,6 +9,7 @@
 ### mbt-android
 Other compenents
 * [mbt-api](https://github.com/slheavner/mbt-api)
+* [mbt-android](https://github.com/slheavner/mbt-android)
 
 ##### Setup
 The project requires a Bus API URL and a Google Maps API Key as string resources
