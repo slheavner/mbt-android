@@ -211,20 +211,18 @@ public class MainActivityFragment extends Fragment{
         @Override
         protected void onPostExecute(List<Bus> buses) {
             super.onPostExecute(buses);
-            if(!MainActivityFragment.this.isResumed()){
-                if(swipeRefreshLayout != null){
-                    swipeRefreshLayout.setRefreshing(false);
-                }
-                if (buses.size() == 0 && getActivity() != null){
-                    Logger.debug(this, "no buses");
-                    Toast.makeText(getActivity(), "There was a problem getting bus data.", Toast.LENGTH_SHORT).show();
-                }else{
-                    Logger.debug(this, "got " + buses.size() + " buses");
-                    if(MainActivityFragment.this.busAdapter != null){
-                        MainActivityFragment.this.busData = buses;
-                        busAdapter.setData(buses);
-                        //busAdapter.notifyDataSetChanged();
-                    }
+            if(swipeRefreshLayout != null){
+                swipeRefreshLayout.setRefreshing(false);
+            }
+            if (buses.size() == 0 && getActivity() != null){
+                Logger.debug(this, "no buses");
+                Toast.makeText(getActivity(), "There was a problem getting bus data.", Toast.LENGTH_SHORT).show();
+            }else{
+                Logger.debug(this, "got " + buses.size() + " buses");
+                if(MainActivityFragment.this.busAdapter != null){
+                    MainActivityFragment.this.busData = buses;
+                    busAdapter.setData(buses);
+                    //busAdapter.notifyDataSetChanged();
                 }
             }
         }
