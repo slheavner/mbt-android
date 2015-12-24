@@ -15,3 +15,7 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-dontwarn com.squareup.**
+-dontwarn okio.**
+#-keep public class com.slheavner.wvubus.MainActivity

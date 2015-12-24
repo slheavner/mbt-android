@@ -140,7 +140,7 @@ public class MainActivityFragment extends Fragment{
         fis.read(bytes);
         String json = new String(bytes);
         Bus[] buses = new Gson().fromJson(json, Bus[].class);
-        return orderBusList(buses);
+        return Arrays.asList(buses);
     }
 
     /**
@@ -149,29 +149,29 @@ public class MainActivityFragment extends Fragment{
      * @param buses bus array to order
      * @return order List of buses
      */
-    private List<Bus> orderBusList(Bus[] buses){
-        List<String> busIds = Arrays.asList(getResources().getStringArray(R.array.bus_ids));
-        Bus[] busList = new Bus[buses.length];
-        for(Bus b : buses){
-            busList[busIds.indexOf(b.getId())] = b;
-        }
-        return Arrays.asList(busList);
-    }
-
-    /**
-     * Not sure this is needed with the new way the adapter updates are handled.
-     * TODO: try to remove this
-     * @param buses bus list to order
-     * @return order List of buses
-     */
-    private List<Bus> orderBusList(List<Bus> buses){
-        List<String> busIds = Arrays.asList(getResources().getStringArray(R.array.bus_ids));
-        Bus[] busList = new Bus[buses.size()];
-        for(Bus b : buses){
-            busList[busIds.indexOf(b.getId())] = b;
-        }
-        return Arrays.asList(busList);
-    }
+//    private List<Bus> orderBusList(Bus[] buses){
+//        List<String> busIds = Arrays.asList(getResources().getStringArray(R.array.bus_ids));
+//        Bus[] busList = new Bus[buses.length];
+//        for(Bus b : buses){
+//            busList[busIds.indexOf(b.getId())] = b;
+//        }
+//        return Arrays.asList(busList);
+//    }
+//
+//    /**
+//     * Not sure this is needed with the new way the adapter updates are handled.
+//     * TODO: try to remove this
+//     * @param buses bus list to order
+//     * @return order List of buses
+//     */
+//    private List<Bus> orderBusList(List<Bus> buses){
+//        List<String> busIds = Arrays.asList(getResources().getStringArray(R.array.bus_ids));
+//        Bus[] busList = new Bus[buses.size()];
+//        for(Bus b : buses){
+//            busList[busIds.indexOf(b.getId())] = b;
+//        }
+//        return Arrays.asList(busList);
+//    }
 
     /**
      * Installs the json at res/raw/buses.json
@@ -194,37 +194,37 @@ public class MainActivityFragment extends Fragment{
                     Gson gson = new Gson();
                     String busJson = getResponseBody(url);
                     buses.addAll(Arrays.asList(gson.fromJson(busJson, Bus[].class)));
-                    if(buses.size() > 0){
+                    if(buses.size() > 0  && getContext() != null){
                         //probably a better place to write this, while staying async.
                         FileOutputStream fos = getContext()
                                 .openFileOutput("buses.json", Context.MODE_PRIVATE);
                         fos.write(busJson.getBytes());
                         fos.close();
-                    }else{
-                        return null;
                     }
                 }catch (Exception e){
                     e.printStackTrace();
                 }
             }
-            return orderBusList(buses);
+            return buses;
         }
 
         @Override
         protected void onPostExecute(List<Bus> buses) {
             super.onPostExecute(buses);
-            if(swipeRefreshLayout != null){
-                swipeRefreshLayout.setRefreshing(false);
-            }
-            if (buses.size() == 0){
-                Logger.debug(this, "no buses");
-                Toast.makeText(getActivity(), "There was a problem getting bus data.", Toast.LENGTH_SHORT).show();
-            }else{
-                Logger.debug(this, "got " + buses.size() + " buses");
-                if(MainActivityFragment.this.busAdapter != null){
-                    MainActivityFragment.this.busData = buses;
-                    busAdapter.setData(buses);
-                    //busAdapter.notifyDataSetChanged();
+            if(!MainActivityFragment.this.isResumed()){
+                if(swipeRefreshLayout != null){
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+                if (buses.size() == 0 && getActivity() != null){
+                    Logger.debug(this, "no buses");
+                    Toast.makeText(getActivity(), "There was a problem getting bus data.", Toast.LENGTH_SHORT).show();
+                }else{
+                    Logger.debug(this, "got " + buses.size() + " buses");
+                    if(MainActivityFragment.this.busAdapter != null){
+                        MainActivityFragment.this.busData = buses;
+                        busAdapter.setData(buses);
+                        //busAdapter.notifyDataSetChanged();
+                    }
                 }
             }
         }
